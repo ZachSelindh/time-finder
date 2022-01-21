@@ -8,11 +8,8 @@ import InputAdornment from '@mui/material/InputAdornment';
 import CardContent from '@mui/material/CardContent';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import TimePicker from '@mui/lab/TimePicker';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import ToggleButton from '@mui/material/ToggleButton';
 import Typography from '@mui/material/Typography';
 import CardActions from '@mui/material/CardActions';
 
@@ -46,14 +43,20 @@ export const TimeFinder = () => {
     }, [difference, hoursValue, minutesValue, timeValue])
 
     return (
-        <Card variant="outlined" sx={{ maxWidth: '15em', color: 'primary.main', mt: '10em', mx: 'auto' }} >
+        <Card variant="outlined" sx={{ maxWidth: '15em', mt: '15%', mx: 'auto' }} >
             <CardHeader 
                 avatar={<AccessTimeIcon />} 
                 title="Time Finder"
-                subheader="Enter time and minutes"
+                subheader="Enter time, then hours, minutes, and difference to find the resulting time"
             />
             <CardContent>
-            <TextField
+                <TimePicker
+                    label="Starting Time"
+                    value={timeValue}
+                    onChange={time => setTimeValue(moment(time))}
+                    renderInput={(params) => <TextField margin="dense" {...params} />}
+                />
+                <TextField
                     type="number"
                     label="Hours"
                     margin="dense"
@@ -73,25 +76,16 @@ export const TimeFinder = () => {
                         endAdornment: <InputAdornment position="end">min</InputAdornment>,
                     }} 
                 />
-                <FormControl>
-                    <FormLabel id="demo-row-radio-buttons-group-label">Difference</FormLabel>
-                        <RadioGroup
-                            row
-                            aria-labelledby="demo-row-radio-buttons-group-label"
-                            name="row-radio-buttons-group"
-                            value={difference}
-                            onChange={ev => setDifference(ev.target.value)}
-                        >
-                        <FormControlLabel value="before" control={<Radio />} label="Before" />
-                        <FormControlLabel value="after" control={<Radio />} label="After" />
-                    </RadioGroup>
-                </FormControl>
-                <TimePicker
-                    label="Time"
-                    value={timeValue}
-                    onChange={time => setTimeValue(moment(time))}
-                    renderInput={(params) => <TextField {...params} />}
-                />
+                <ToggleButtonGroup
+                    color="primary"
+                    value={difference}
+                    fullWidth
+                    exclusive
+                    onChange={ev => setDifference(ev.target.value)}
+                >
+                    <ToggleButton value="before">Before</ToggleButton>
+                    <ToggleButton value="after">After</ToggleButton>
+                </ToggleButtonGroup>
                 <Typography variant="h5" align="center" sx={{ mt: '1em' }}>
                     {result}
                 </Typography>
