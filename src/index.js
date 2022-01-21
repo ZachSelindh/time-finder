@@ -3,10 +3,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { ThemeProvider } from '@mui/material/styles';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import { theme } from './theme';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
+    <ThemeProvider theme={theme}>
+      <App />
+    </ThemeProvider>
+    </LocalizationProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
