@@ -1,16 +1,15 @@
 {
   "files": {
-    "main.css": "/ZachSelindh/time-finder/static/css/main.073c9b0a.css",
-    "main.js": "/ZachSelindh/time-finder/static/js/main.bea2b613.js",
+    "main.css": "/ZachSelindh/time-finder/static/css/main.e6c13ad2.css",
+    "main.js": "/ZachSelindh/time-finder/static/js/main.575a983c.js",
     "static/js/787.454f3709.chunk.js": "/ZachSelindh/time-finder/static/js/787.454f3709.chunk.js",
-    "static/media/logo.svg": "/ZachSelindh/time-finder/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/ZachSelindh/time-finder/index.html",
-    "main.073c9b0a.css.map": "/ZachSelindh/time-finder/static/css/main.073c9b0a.css.map",
-    "main.bea2b613.js.map": "/ZachSelindh/time-finder/static/js/main.bea2b613.js.map",
+    "main.e6c13ad2.css.map": "/ZachSelindh/time-finder/static/css/main.e6c13ad2.css.map",
+    "main.575a983c.js.map": "/ZachSelindh/time-finder/static/js/main.575a983c.js.map",
     "787.454f3709.chunk.js.map": "/ZachSelindh/time-finder/static/js/787.454f3709.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.073c9b0a.css",
-    "static/js/main.bea2b613.js"
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.575a983c.js"
   ]
 }
