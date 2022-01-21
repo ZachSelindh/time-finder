@@ -43,7 +43,7 @@ export const TimeFinder = () => {
     }, [difference, hoursValue, minutesValue, timeValue])
 
     return (
-        <Card variant="outlined" sx={{ maxWidth: '15em', mt: '15%', mx: 'auto' }} >
+        <Card variant="outlined" sx={{ maxWidth: '15em', mt: '10%', mx: 'auto' }} >
             <CardHeader 
                 avatar={<AccessTimeIcon />} 
                 title="Time Finder"
