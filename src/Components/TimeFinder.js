@@ -1,6 +1,7 @@
 import * as React from 'react';
 import moment from 'moment';
 import Card from '@mui/material/Card';
+import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import CardHeader from '@mui/material/CardHeader';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -13,20 +14,36 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import Typography from '@mui/material/Typography';
+import CardActions from '@mui/material/CardActions';
 
 export const TimeFinder = () => {
     const [timeValue, setTimeValue] = React.useState(moment());
     const [minutesValue, setMinutesValue] = React.useState(0);
+    const [hoursValue, setHoursValue] = React.useState(0);
     const [difference, setDifference] = React.useState('before');
     const [result, setResult] = React.useState(null);
 
+    const handleReset = React.useCallback(() => {
+        setTimeValue(moment())
+        setMinutesValue(0);
+        setHoursValue(0)
+    }, [])
+
     React.useEffect(() => {
         if (difference === 'before') {
-            setResult(moment(timeValue).subtract(minutesValue, 'minutes').format("hh:mm A"))
+            setResult(
+                moment(timeValue)
+                    .subtract(hoursValue, 'hours')
+                    .subtract(minutesValue, 'minutes')
+                    .format("hh:mm A"))
         } else if (difference === 'after') {
-            setResult(moment(timeValue).add(minutesValue, 'minutes').format("hh:mm A"))
+            setResult(
+                moment(timeValue)
+                .add(hoursValue, 'hours')
+                .add(minutesValue, 'minutes')
+                .format("hh:mm A"))
         }
-    }, [difference, minutesValue, timeValue])
+    }, [difference, hoursValue, minutesValue, timeValue])
 
     return (
         <Card variant="outlined" sx={{ maxWidth: '15em', color: 'primary.main', mt: '10em', mx: 'auto' }} >
@@ -36,6 +53,16 @@ export const TimeFinder = () => {
                 subheader="Enter time and minutes"
             />
             <CardContent>
+            <TextField
+                    type="number"
+                    label="Hours"
+                    margin="dense"
+                    value={hoursValue}
+                    onChange={ev => setHoursValue(ev.target.value)}
+                    InputProps={{
+                        endAdornment: <InputAdornment position="end">hr</InputAdornment>,
+                    }} 
+                />
                 <TextField
                     type="number"
                     label="Minutes"
@@ -68,6 +95,15 @@ export const TimeFinder = () => {
                 <Typography variant="h5" align="center" sx={{ mt: '1em' }}>
                     {result}
                 </Typography>
+                <CardActions>
+                    <Button 
+                        variant="contained" 
+                        sx={{ margin: 'auto' }}
+                        onClick={handleReset}
+                    >
+                        Reset
+                    </Button>
+                </CardActions>
             </CardContent>
         </Card>
     );
