@@ -1,8 +1,14 @@
 import * as React from 'react';
-import { TimeFinder } from './Components/TimeFinder'
+import { Appbar } from './Components/Appbar';
+import { TimeFinder } from './Components/TimeFinder';
 
 function App() {
-  return (<TimeFinder />);
+  return (
+    <>
+      <Appbar />
+      <TimeFinder />
+    </>
+  );
 }
 
 export default App;

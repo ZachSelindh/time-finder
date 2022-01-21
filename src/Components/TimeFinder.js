@@ -1,5 +1,7 @@
 import * as React from 'react';
 import moment from 'moment';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import Card from '@mui/material/Card';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -19,6 +21,9 @@ export const TimeFinder = () => {
     const [hoursValue, setHoursValue] = React.useState(0);
     const [difference, setDifference] = React.useState('before');
     const [result, setResult] = React.useState(null);
+
+    const theme = useTheme();
+    const isNotSmall = useMediaQuery(theme.breakpoints.up('sm'));
 
     const handleReset = React.useCallback(() => {
         setTimeValue(moment())
@@ -43,23 +48,23 @@ export const TimeFinder = () => {
     }, [difference, hoursValue, minutesValue, timeValue])
 
     return (
-        <Card variant="outlined" sx={{ maxWidth: '15em', mt: '10%', mx: 'auto' }} >
+        <Card variant="outlined" sx={isNotSmall ? { maxWidth: '35%', mt: '10%', mx: 'auto' } : { maxWidth: '90%', mt: '10%', mx: 'auto' }} >
             <CardHeader 
                 avatar={<AccessTimeIcon />} 
-                title="Time Finder"
-                subheader="Enter time, then hours, minutes, and difference to find the resulting time"
+                title="Enter time, then hours, minutes, and difference to find the resulting time"
             />
             <CardContent>
                 <TimePicker
                     label="Starting Time"
                     value={timeValue}
                     onChange={time => setTimeValue(moment(time))}
-                    renderInput={(params) => <TextField margin="dense" {...params} />}
+                    renderInput={(params) => <TextField fullWidth margin="dense" {...params} />}
                 />
                 <TextField
                     type="number"
                     label="Hours"
                     margin="dense"
+                    fullWidth
                     value={hoursValue}
                     onChange={ev => setHoursValue(ev.target.value)}
                     InputProps={{
@@ -70,6 +75,7 @@ export const TimeFinder = () => {
                     type="number"
                     label="Minutes"
                     margin="dense"
+                    fullWidth
                     value={minutesValue}
                     onChange={ev => setMinutesValue(ev.target.value)}
                     InputProps={{
